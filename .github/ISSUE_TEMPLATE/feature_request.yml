@@ -1,0 +1,46 @@
+name: Feature Request
+description: Propose a new feature, matching rule, or transport integration for Vexfox
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We appreciate feature ideas! Please describe the use case and proposed API design clearly.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Motivation
+      description: Is your feature request related to a specific problem or testing limitation?
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution / API Design
+      description: Describe what you want to happen and how you envision the Python API or CLI command.
+      render: python
+      placeholder: |
+        # Proposed usage:
+        config = vexfox.VexfoxConfig(...)
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Considered Alternatives
+      description: Any alternative solutions or workarounds you've considered?
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, HTTP RFC references, or links.
+    validations:
+      required: false
