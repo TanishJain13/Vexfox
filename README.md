@@ -91,6 +91,7 @@ with vexfox.use_cassette("fixtures/users.json"):
 import httpx
 import vexfox
 
+
 async def test_async_service():
     async with vexfox.use_cassette("fixtures/async_users.json"):
         async with httpx.AsyncClient() as client:
@@ -183,6 +184,7 @@ Vexfox automatically registers a `vexfox` pytest fixture:
 
 ```python
 import httpx
+
 
 def test_user_profile(vexfox):
     with vexfox("fixtures/user_profile.json"):

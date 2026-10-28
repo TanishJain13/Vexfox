@@ -60,11 +60,13 @@ import httpx
 import pytest
 import vexfox
 
+
 @pytest.fixture
 def api_cassette(tmp_path):
     cassette = tmp_path / "test_api.json"
     with vexfox.use_cassette(cassette, mode="once"):
         yield
+
 
 def test_api_call(api_cassette):
     resp = httpx.get("https://api.example.com/v1/items")
