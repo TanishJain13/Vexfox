@@ -76,5 +76,5 @@ with vexfox.use_cassette("fixtures/users.json"):
 
 ## Verification & Quality
 
-- Test suite: **35 passing tests** across sync, async, security redaction, and CLI workflows.
+- Test suite: **37 passing tests** across sync, async, security redaction, and CLI workflows.
 - Code quality: Ruff-checked and formatted, strictly typed (`py.typed`).

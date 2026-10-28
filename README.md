@@ -230,7 +230,7 @@ We welcome contributions! Please review [CONTRIBUTING.md](CONTRIBUTING.md) and [
 
 ```bash
 # Clone the repository
-git clone https://github.com/vexfox/vexfox.git
+git clone https://github.com/TanishJain13/Vexfox.git
 cd vexfox
 
 # Install with test dependencies

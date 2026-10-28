@@ -1,0 +1,76 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Test & Build Package Distributions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout released tag
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies and build tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+          pip install -e ".[test]"
+
+      - name: Run test suite
+        run: |
+          python -m pytest -v
+
+      - name: Verify CLI executable entry point
+        run: |
+          vexfox --version
+          vexfox --help
+          vexfox doctor
+
+      - name: Build sdist and wheel
+        run: |
+          python -m build
+
+      - name: Validate distribution packages with Twine
+        run: |
+          python -m twine check dist/*
+
+      - name: Store distribution packages as artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    name: Publish to PyPI via Trusted Publishing
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/vexfox
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Download distribution packages
+        uses: actions/download-artifact@v4
+        with:
+          name: python-package-distributions
+          path: dist/
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
+
